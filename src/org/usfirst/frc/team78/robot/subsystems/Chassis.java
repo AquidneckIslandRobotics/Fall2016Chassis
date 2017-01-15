@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.*;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -25,6 +26,10 @@ public class Chassis extends Subsystem {
 		CANTalon rightFront = new CANTalon(RobotMap.RIGHT_FRONT);
 		CANTalon rightBack = new CANTalon(RobotMap.RIGHT_BACK);
 		CANTalon rightTop = new CANTalon(RobotMap.RIGHT_TOP);
+		
+		
+		
+	
 		
 		//sensors
 		public final AHRS ahrs = new AHRS(SPI.Port.kMXP);

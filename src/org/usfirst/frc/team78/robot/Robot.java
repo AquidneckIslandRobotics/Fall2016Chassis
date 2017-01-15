@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team78.robot.subsystems.Chassis;
 import org.usfirst.frc.team78.robot.subsystems.PID;
+import org.usfirst.frc.team78.robot.subsystems.Prototypes;
 import org.usfirst.frc.team78.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final Vision vision = new Vision();
 	public static final PID pid = new PID();
+	public static final Prototypes proto = new Prototypes();
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -102,18 +104,30 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
     	vision.printPixyStuff();
         if (autonomousCommand != null) autonomousCommand.cancel();
+    
+        SmartDashboard.putNumber("Top Lrft", 0.0);
+        SmartDashboard.putNumber("Top Right", 0.0);
+        SmartDashboard.putNumber("Bottom Left", 0.0);
+        SmartDashboard.putNumber("Bottom Right", 0.0);
     }
+    
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
     	
-    	//vision
+    	
+      	
+    	
+    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
+    	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
+    	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
+    	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
+    	
+    	
     	vision.printPixyStuff();
-    	SmartDashboard.putBoolean("test", true);
-    	SmartDashboard.putBoolean("heading_correction_toggled", DriveWithJoysticks.heading_correction_toggled);
-        Scheduler.getInstance().run();
+    	Scheduler.getInstance().run();
        
     }
     
