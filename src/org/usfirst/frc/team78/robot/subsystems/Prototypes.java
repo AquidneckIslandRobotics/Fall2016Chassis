@@ -35,14 +35,21 @@ public class Prototypes extends Subsystem {
 	
 	public void setVictorRate(double targetRate, int motor){
 		//double power = targetRate;
-		double powerAdd = 0;
-		double scale = 27500;
+		//double powerAdd = 0;
+		//double scale = 27500;
 		
-		double rate = getEncRate();
+		double setRate = targetRate;
+		double feedForward = .5;
+		double kP = 1/27500;
+		
+		//double rate = getEncRate();
+		double currentRate = getEncRate();
     	
-    	powerAdd = (targetRate - rate) / scale;
+    	//powerAdd = (targetRate - rate) / scale;
+		double rateErr = setRate - currentRate;
     	
-    	Robot.proto.setVictorSpeed(0, ((targetRate/scale) + powerAdd));
+    	//Robot.proto.setVictorSpeed(0, ((targetRate/scale) + powerAdd));
+		Robot.proto.setVictorSpeed(0, rateErr * kP + feedForward);
 	}
 	
 	public void setVictorSpeed(int motor, double val){
