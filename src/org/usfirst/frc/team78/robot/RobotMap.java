@@ -33,4 +33,7 @@ public class RobotMap {
 	//Sensors
 	public static final int SHOOTER_ENC_A = 0;
 	public static final int SHOOTER_ENC_B = 1;
+	
+	//public static final double ENC_RATE = 1;
+	public static final double PROTO_SCALE = 0.2;
 }

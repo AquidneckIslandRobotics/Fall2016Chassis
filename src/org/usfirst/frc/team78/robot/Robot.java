@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team78.robot.commands.SetVictorRate;
 import org.usfirst.frc.team78.robot.subsystems.Chassis;
 import org.usfirst.frc.team78.robot.subsystems.PID;
 import org.usfirst.frc.team78.robot.subsystems.Prototypes;
@@ -46,6 +47,8 @@ public class Robot extends IterativeRobot {
         
         Compressor c = new Compressor(0);
     	c.setClosedLoopControl(true);
+    	
+    	proto.setEncParam(36, 0.1);//36 accounts for gearing
     }
 	
     
@@ -109,22 +112,35 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Top Right", 0.0);
         SmartDashboard.putNumber("Bottom Left", 0.0);
         SmartDashboard.putNumber("Bottom Right", 0.0);
+        
+        SmartDashboard.putNumber("Top Lrft rate", 0.0);
+        SmartDashboard.putNumber("Top Right rate", 0.0);
+        SmartDashboard.putNumber("Bottom Left rate", 0.0);
+        SmartDashboard.putNumber("Bottom Right rate", 0.0);
     }
     
-
+    
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	
-    	
-      	
-    	
-    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
+    	//Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
     	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
     	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
     	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
+   
+//        Robot.proto.setVictorRate(SmartDashboard.getNumber("Top Lrft rate", 0.0), 0);
+//    	Robot.proto.setVictorRate(SmartDashboard.getNumber("Top Right rate", 0.0), 1);
+//    	Robot.proto.setVictorRate(SmartDashboard.getNumber("Bottom Left rate", 0.0), 2);
+//    	Robot.proto.setVictorRate(SmartDashboard.getNumber("Bottom Right rate", 0.0), 3);
+
+    	double val = SmartDashboard.getNumber("Top Lrft", 0.0);
     	
+    	Robot.proto.setVictorRate(val, 0);
+    	
+    	
+    	SmartDashboard.putNumber("Motor left", proto.topLRft.get());
+    	SmartDashboard.putNumber("Enc", proto.getEncRate());
     	
     	vision.printPixyStuff();
     	Scheduler.getInstance().run();
