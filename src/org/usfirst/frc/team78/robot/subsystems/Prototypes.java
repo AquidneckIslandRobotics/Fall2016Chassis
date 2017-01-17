@@ -36,7 +36,7 @@ public class Prototypes extends Subsystem {
 	public void setVictorRate(double targetRate, int motor){
 		//double power = targetRate;
 		double powerAdd = 0;
-		double scale = 27500;
+		double scale = 28000;
 		
 		double rate = getEncRate();
     	
