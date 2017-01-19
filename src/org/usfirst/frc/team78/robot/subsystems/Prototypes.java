@@ -21,7 +21,13 @@ public class Prototypes extends Subsystem {
 	
 	Encoder shooterEnc = new Encoder(RobotMap.SHOOTER_ENC_A, RobotMap.SHOOTER_ENC_B);
 	
-	
+	public double getEncRPM() {
+		double rate = shooterEnc.getRate(); //In pulses per second
+		double PPR = RobotMap.PULSES_PER_ROTATION * RobotMap.ENC_GEARING; //Pulses per wheel rotation
+		rate /= PPR;  //Changes rate to wheel rotations per second
+		rate *= 60;  //Changes rate to wheel rotations per minute - RPM
+		return rate;
+	}
 	
 	public void setVictorSpeed(int motor, double val){
 		
@@ -44,6 +50,19 @@ public class Prototypes extends Subsystem {
 			bottomLeft.set(0);
 			bottomRight.set(0);
 		}
+	}
+	
+	double motor_power = 0;
+	final double P_CONST = 0.00001;
+	
+	public void setVictorPID(int motor, double target_RPM) {
+		double current_RPM = getEncRPM();
+		if(current_RPM < target_RPM) {
+			motor_power += (P_CONST * Math.abs(current_RPM - target_RPM));
+		} else if(current_RPM > target_RPM) {
+			motor_power -= (P_CONST * Math.abs(current_RPM - target_RPM));
+		}
+		setVictorSpeed(motor, motor_power);
 	}
 	
     public void initDefaultCommand() {

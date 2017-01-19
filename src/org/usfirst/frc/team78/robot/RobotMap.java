@@ -33,4 +33,8 @@ public class RobotMap {
 	//Sensors
 	public static final int SHOOTER_ENC_A = 0;
 	public static final int SHOOTER_ENC_B = 1;
+	public static final int PULSES_PER_ROTATION = 12; //# of encoder pulses per revolution
+	public static final int ENC_GEARING = 3;  //Gear ratio; ex. 3 means three revolutions of
+											  //motor/encoder per 1 revolution of the wheel(s).
+											  //This is multiplied by the pulses per rotation.
 }

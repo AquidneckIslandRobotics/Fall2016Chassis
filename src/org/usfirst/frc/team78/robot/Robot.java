@@ -120,10 +120,17 @@ public class Robot extends IterativeRobot {
     	
       	
     	
-    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
-    	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
-    	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
-    	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
+//    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
+//    	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
+//    	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
+//    	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
+    	
+    	SmartDashboard.putNumber("RPM", proto.getEncRPM());
+    	
+    	Robot.proto.setVictorPID(0, SmartDashboard.getNumber("Top Lrft PID", 0.0));
+    	Robot.proto.setVictorPID(1, SmartDashboard.getNumber("Top Right PID", 0.0));
+    	Robot.proto.setVictorPID(2, SmartDashboard.getNumber("Bottom Left PID", 0.0));
+    	Robot.proto.setVictorPID(3, SmartDashboard.getNumber("Bottom Right PID", 0.0));
     	
     	
     	vision.printPixyStuff();
