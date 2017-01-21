@@ -113,6 +113,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Bottom Left", 0.0);
         SmartDashboard.putNumber("Bottom Right", 0.0);
         
+        //SmartDashboard.putNumber("Gain", 0.1);
+        
 //        SmartDashboard.putNumber("Top Lrft rate", 0.0);
 //        SmartDashboard.putNumber("Top Right rate", 0.0);
 //        SmartDashboard.putNumber("Bottom Left rate", 0.0);
@@ -124,7 +126,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
+    	//Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
     	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
     	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
     	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
@@ -134,16 +136,20 @@ public class Robot extends IterativeRobot {
 //    	Robot.proto.setVictorRate(SmartDashboard.getNumber("Bottom Left rate", 0.0), 2);
 //    	Robot.proto.setVictorRate(SmartDashboard.getNumber("Bottom Right rate", 0.0), 3);
 
+    	
     	double val = SmartDashboard.getNumber("Top Lrft", 0.0);
+    	//double gain = SmartDashboard.getNumber("Gain", 0.1);
     	
     	//Robot.proto.setVictorRate(val, 0);
     	//Robot.proto.bangBang(val, 0);
-    	//Robot.proto.takeBackHalf(val, 0);
+    	Robot.proto.takeBackHalf(val, 0);
     	
     	SmartDashboard.putNumber("Motor left", proto.topLRft.get());
     	SmartDashboard.putNumber("Enc", proto.getEncRate());
     	
     	vision.printPixyStuff();
+    	
+    	SmartDashboard.putBoolean("Bumper Switch", !proto.bumperSwitch());
     	Scheduler.getInstance().run();
        
     }

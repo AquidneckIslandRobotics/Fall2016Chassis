@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  *
@@ -23,6 +24,8 @@ public class Prototypes extends Subsystem {
 	public VictorSP bottomRight = new VictorSP(RobotMap.BOTTOM_RIGHT);
 	
 	public Encoder shooterEnc = new Encoder(RobotMap.SHOOTER_ENC_A, RobotMap.SHOOTER_ENC_B, true, EncodingType.k1X);
+	
+	public DigitalInput bumber = new DigitalInput(RobotMap.BUMPER_SWITCH);
 	
 	public void setEncParam(double pulsePerRot, double maxPeriod){
 		shooterEnc.reset();
@@ -51,18 +54,18 @@ public class Prototypes extends Subsystem {
 		double rate = getEncRate();
 		if(rate < targetRate){
 			setVictorSpeed(motor, 1);
-		}else if(rate > targetRate){
-			setVictorSpeed(motor, 0.75);
+	//	}else if(rate > targetRate){
+	//		setVictorSpeed(motor, 0.75);
 		}else{
 			setVictorSpeed(motor, 0);
 		}
 	}
-	double gain = 0.01;
+	double gain = 0.05;
 	double current = 0;
 	double actual = getEncRate();
 	double previous = 0;
 	
-	public void takeBackHalf(double desired, int motor){
+	public void takeBackHalf(double desired, int motor){//, double gain){
 //		double gain = 0.1;
 //		double current = 0;
 //		double actual = getEncRate();
@@ -119,6 +122,14 @@ public class Prototypes extends Subsystem {
 			topRight.set(0);
 			bottomLeft.set(0);
 			bottomRight.set(0);
+		}
+	}
+	
+	public boolean bumperSwitch(){
+		if(bumber.get()){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
