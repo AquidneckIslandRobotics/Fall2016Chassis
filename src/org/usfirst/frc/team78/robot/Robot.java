@@ -119,12 +119,16 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
+    	//Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
     	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
     	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
     	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
 
     	SmartDashboard.putNumber("Enc", proto.getEncRate());
+    	//SmartDashboard.putNumber("count", proto.shooterEnc.getRaw());
+    	
+    	double val = SmartDashboard.getNumber("Top Lrft", 0.0);
+    	Robot.proto.takeBackHalf(val, 0);
     	
     	vision.printPixyStuff();
     	

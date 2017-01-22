@@ -29,12 +29,61 @@ public class Prototypes extends Subsystem {
 		
 	public void encInit() {
 		shooterEnc.reset();
-		shooterEnc.setDistancePerPulse(21.6);//6.55
+		shooterEnc.setDistancePerPulse(6.55);//wheel rpm (21.6 motor rpm)
 		shooterEnc.setSamplesToAverage(5);
 		
 	}
 	public double getEncRate(){
 		return shooterEnc.getRate();
+	}
+	
+	public void setVictorRate(double targetRate, int motor){
+		double powerAdd = 0;
+		double scale = 28000;
+		
+		double rate = getEncRate();
+    	
+    	powerAdd = (targetRate - rate) / scale;
+    	
+    	setVictorSpeed(motor, ((targetRate/scale) + powerAdd));
+	}
+	
+	public void bangBang(double targetRate, int motor){
+		double rate = getEncRate();
+		if(rate < targetRate){
+			setVictorSpeed(motor, 1);
+		}else{
+			setVictorSpeed(motor, 0);
+		}
+	}
+	
+	double gain = 0.000225;
+	double current = 0;
+	double actual = getEncRate();
+	double previous = 0;
+	public void takeBackHalf(double desired, int motor){//, double gain){
+		
+		switch(motor){
+		case 0:
+			current = topLRft.get();
+			break;
+		case 1:
+			current = topRight.get();
+			break;
+		case 2:
+			current = bottomLeft.get();
+			break;
+		case 3:
+			current = bottomRight.get();
+			break;
+		}	
+		current = (current - previous)/2;
+		current = current + gain*(desired - actual);
+		//current = (current - previous)/2;
+		
+		setVictorSpeed(motor, current);
+		
+		previous = current;
 	}
 	
 	
