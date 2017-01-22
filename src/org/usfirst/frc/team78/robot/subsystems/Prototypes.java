@@ -54,6 +54,7 @@ public class Prototypes extends Subsystem {
 		double RPM = RPS * 60;  //Convert rotations per second to rotations per minute
 		
 		RPM *= 4;  //Because this might make it work??
+				   //Edit: does make it work.  Not sure why
 		
 		return RPM;  //Return final RPM value
 	}
