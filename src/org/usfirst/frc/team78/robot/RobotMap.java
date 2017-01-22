@@ -29,7 +29,7 @@ public class RobotMap {
 	public static final int TOP_RIGHT = 1;
 	public static final int BOTTOM_LEFT = 2;
 	public static final int BOTTOM_RIGHT = 3;
-	
+		
 	//Sensors
 	public static final int SHOOTER_ENC_A = 0;
 	public static final int SHOOTER_ENC_B = 1;

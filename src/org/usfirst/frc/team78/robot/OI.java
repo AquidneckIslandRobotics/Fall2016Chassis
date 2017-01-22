@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team78.robot.commands.IntakeGear;
+import org.usfirst.frc.team78.robot.commands.OuttakeGear;
 import org.usfirst.frc.team78.robot.commands.PixyAim;
 
 /**
@@ -60,6 +62,11 @@ public class OI {
 		btn3 = new JoystickButton(driverStick, 3);
 		btn3.whileHeld(new PixyAim());
 		
+		btn6 = new JoystickButton(driverStick, 6); //Intake
+		btn5 = new JoystickButton(driverStick, 5); //Outtake
+		
+		btn6.whileHeld(new IntakeGear(RobotMap.TOP_RIGHT));
+		btn5.whileHeld(new OuttakeGear(RobotMap.TOP_RIGHT));
 		
 	}
 	

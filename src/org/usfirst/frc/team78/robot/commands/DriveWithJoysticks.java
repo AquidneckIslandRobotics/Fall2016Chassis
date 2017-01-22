@@ -30,8 +30,9 @@ public class DriveWithJoysticks extends Command {
     	double left = Robot.oi.getDriverLeftStick();
     	double right = Robot.oi.getDriverRightStick();
     	
-    	if(Math.abs(left - right) <= 0.1 && Math.abs(left) >= 0.85 && Math.abs(right) >= 0.85) {
-    		heading_correction_toggled = true;
+    	/*if(Math.abs(left - right) <= 0.1 && Math.abs(left) >= 0.85 && Math.abs(right) >= 0.85) {
+    		//Uncomment next line to enable heading correction (doesn't work as of 1-19-17)
+    		//heading_correction_toggled = true;
     	} else {
     		heading_correction_toggled = false;
     	}
@@ -42,7 +43,10 @@ public class DriveWithJoysticks extends Command {
     		Robot.chassis.driveWithJoysticks();		
     	}
     	
-    	SmartDashboard.putBoolean("toggle", heading_correction_toggled);
+    	SmartDashboard.putBoolean("toggle", heading_correction_toggled);*/
+    	
+    	Robot.chassis.driveWithJoysticks();
+    	
     }
     	
     // Make this return true when this Command no longer needs to run execute()
