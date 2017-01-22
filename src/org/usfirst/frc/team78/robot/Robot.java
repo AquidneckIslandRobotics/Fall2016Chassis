@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
         Compressor c = new Compressor(0);
     	c.setClosedLoopControl(true);
     	
-    	proto.setEncParam(36, 0.1);//36 accounts for gearing
+    	proto.encInit();
     }
 	
     
@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	//Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
+    	Robot.proto.setVictorSpeed(0, SmartDashboard.getNumber("Top Lrft", 0.0));
     	Robot.proto.setVictorSpeed(1, SmartDashboard.getNumber("Top Right", 0.0));
     	Robot.proto.setVictorSpeed(2, SmartDashboard.getNumber("Bottom Left", 0.0));
     	Robot.proto.setVictorSpeed(3, SmartDashboard.getNumber("Bottom Right", 0.0));
@@ -142,7 +142,7 @@ public class Robot extends IterativeRobot {
     	
     	//Robot.proto.setVictorRate(val, 0);
     	//Robot.proto.bangBang(val, 0);
-    	Robot.proto.takeBackHalf(val, 0);
+    	//Robot.proto.takeBackHalf(val, 0);
     	
     	SmartDashboard.putNumber("Motor left", proto.topLRft.get());
     	SmartDashboard.putNumber("Enc", proto.getEncRate());

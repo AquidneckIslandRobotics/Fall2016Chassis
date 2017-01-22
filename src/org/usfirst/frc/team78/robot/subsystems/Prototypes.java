@@ -23,17 +23,16 @@ public class Prototypes extends Subsystem {
 	public VictorSP bottomLeft = new VictorSP(RobotMap.BOTTOM_LEFT);
 	public VictorSP bottomRight = new VictorSP(RobotMap.BOTTOM_RIGHT);
 	
-	public Encoder shooterEnc = new Encoder(RobotMap.SHOOTER_ENC_A, RobotMap.SHOOTER_ENC_B, true, EncodingType.k1X);
+	public Encoder shooterEnc = new Encoder(RobotMap.SHOOTER_ENC_A, RobotMap.SHOOTER_ENC_B, false, EncodingType.k4X);
 	
 	public DigitalInput bumber = new DigitalInput(RobotMap.BUMPER_SWITCH);
-	
-	public void setEncParam(double pulsePerRot, double maxPeriod){
+		
+	public void encInit() {
 		shooterEnc.reset();
-		shooterEnc.setDistancePerPulse(36);
-		//shooterEnc.setMaxPeriod(maxPeriod);	
-		shooterEnc.setMinRate(1);
+		shooterEnc.setDistancePerPulse(21.6);//6.55
+		shooterEnc.setSamplesToAverage(5);
+		
 	}
-	
 	public double getEncRate(){
 		return shooterEnc.getRate();
 	}
