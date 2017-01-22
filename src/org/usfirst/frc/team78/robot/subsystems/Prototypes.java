@@ -43,11 +43,19 @@ public class Prototypes extends Subsystem {
 	
 	
 	public double getEncRPM() {
-		double rate = shooterEnc.getRate(); //In pulses per second
+		//double rate = shooterEnc.getRate(); //In pulses per second
 		/*double PPR = RobotMap.PULSES_PER_ROTATION * RobotMap.ENC_GEARING; //Pulses per wheel rotation
 		rate /= PPR;  //Changes rate to wheel rotations per second
 		rate *= 60;  //Changes rate to wheel rotations per minute - RPM*/
-		return rate;
+		
+		double period = shooterEnc.getPeriod();  //Period = time (seconds) between pulses
+		double SPR = period * 36;  //Multiply by pulses per rotation - MUST CHANGE MANUALLY - to get seconds per rotation
+		double RPS = 1 / SPR;  //Cross multiply to get rotations per second
+		double RPM = RPS * 60;  //Convert rotations per second to rotations per minute
+		
+		RPM *= 4;  //Because this might make it work??
+		
+		return RPM;  //Return final RPM value
 	}
 	
 	public void setVictorSpeed(int motor, double val){
