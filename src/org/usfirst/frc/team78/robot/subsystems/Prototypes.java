@@ -29,7 +29,7 @@ public class Prototypes extends Subsystem {
 		
 	public void encInit() {
 		shooterEnc.reset();
-		shooterEnc.setDistancePerPulse(6.55);//wheel rpm (21.6 motor rpm)
+		shooterEnc.setDistancePerPulse(6.55);//6.55 single shot wheel rpm (21.6 motor rpm)
 		shooterEnc.setSamplesToAverage(5);
 		
 	}
@@ -61,8 +61,7 @@ public class Prototypes extends Subsystem {
 	double current = 0;
 	double actual = getEncRate();
 	double previous = 0;
-	public void takeBackHalf(double desired, int motor){//, double gain){
-		
+	public void takeBackHalf(double desired, int motor, int motor2){//, double gain){
 		switch(motor){
 		case 0:
 			current = topLRft.get();
@@ -82,6 +81,7 @@ public class Prototypes extends Subsystem {
 		//current = (current - previous)/2;
 		
 		setVictorSpeed(motor, current);
+		setVictorSpeed(motor2, current);
 		
 		previous = current;
 	}

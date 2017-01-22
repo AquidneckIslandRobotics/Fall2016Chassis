@@ -128,7 +128,7 @@ public class Robot extends IterativeRobot {
     	//SmartDashboard.putNumber("count", proto.shooterEnc.getRaw());
     	
     	double val = SmartDashboard.getNumber("Top Lrft", 0.0);
-    	Robot.proto.takeBackHalf(val, 0);
+    	Robot.proto.takeBackHalf(val, 0, 1);
     	
     	vision.printPixyStuff();
     	
